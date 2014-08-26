@@ -1,7 +1,7 @@
 package ipaddress.helper;
 
 /**
- * a class for processing ip
+ * a class for processing ip address
  * 
  * @author ngovi
  *
@@ -27,5 +27,27 @@ public class IPHelper {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Convert IP Address to Long
+	 * @param ipAddress
+	 * @return
+	 * @throws Exception
+	 */
+	public long IptoLong(String ipAddress) throws Exception {
+		String[] ipAddressSplits = ipAddress.split("\\.");
+		long result = 0;
+		if (ipAddressSplits.length == 4) {
+
+			for (int i = 0; i < ipAddressSplits.length; i++) {
+				int power = 3 - i;
+				int ip = Integer.parseInt(ipAddressSplits[i]);
+				result += ip * Math.pow(256, power);
+			}
+		} else {
+			throw new Exception("Invalid IpAddress");
+		}
+		return result;
 	}
 }
